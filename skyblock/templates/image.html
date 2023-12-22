@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<script src="static/js/image.js"></script>
+<script src="https://kit.fontawesome.com/625ebdf0dc.js" crossorigin="anonymous"></script>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Viewer</title>
+    <link rel="stylesheet" href="static/css/gallery.css">
+</head>
+
+<script>
+    let imageInfo =  "{{ image_info }}"
+</script>
+
+{% if mod %}
+<script>
+    let modCardShown = false;
+    function revealModCard() {
+
+        if(infoCardShown) {
+            revealInfoCard();
+        }
+
+        modCardShown = !modCardShown;
+        let modCard = document.getElementById("mod-card");
+
+        if (modCardShown) {
+            modCard.style.display = "block"
+        } else {
+            modCard.style.display = "none"
+        };
+    };
+
+    document.addEventListener('DOMContentLoaded', function () {
+        let cw = imageInfo['cw'],
+            originalCreator = imageInfo['original_creator'],
+            hash = imageInfo['raw_hash'];
+
+        document.getElementById('image-hash').value = hash;
+        document.getElementById("original-creator").value = originalCreator;
+
+        let cwDropdown = document.getElementById("cw");
+        for (var i = 0; i < cwDropdown.options.length; i++) {
+            if (cwDropdown.options[i].value === cw) {
+                cwDropdown.options[i].selected = true;
+                break;
+            }
+        } 
+    })
+</script>
+{% endif %}
+
+<body>
+    <button id="info-modal" onclick="revealInfoCard()"><i class="fa-solid fa-info"></i></button>
+    {% if mod %}
+        <button id="mod-modal" onclick="revealModCard()"><i class="fa-solid fa-gear"></i></button>
+    {% endif %}
+    <div id="info-card" class="card">
+        <b>Image Link:</b><p id="image-link-info"></p>
+        <b>Original Creator:</b><p id="original-creator-info"></p>
+        <b>Source Type:</b><p id="source-type-info"></p>
+    </div>
+    {% if mod and cw_map %}
+        <div id="mod-card" class="card">
+            <form method="post" action="{{ url_for('skyblock.api.edit_image') }}"> <!-- TODO -->
+                <label for="cw"><b>CW Level:</b></label>
+                <select id="cw" name="option">
+                    {% for level, level_string in cw_map.items() %}
+                        <option value="{{ level }}">{{ level_string }}</option>
+                    {% endfor %}
+                </select>
+                
+                <label for="original-creator"><b>Original Creator:</b></label>
+                <input type="text" id="original-creator" name="original-creator"><br>
+            
+                <input type="text" id="image-hash" name="image-hash" value="">
+                <input type="submit" value="Submit">
+            </form>
+        </div>
+    {% endif %}
+    <a href="" id="image-link" target="_blank" rel="noopener noreferrer"><img src="" id="modal-image"></a>
+</body>

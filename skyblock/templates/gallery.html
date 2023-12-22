@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<script>
+    let images_api_url = "{{ url_for('skyblock.api.fetch_images') }}",
+        redirectUrl = "{{ url_for('skyblock.display_gallery') }}", // ALERT TODO ALERT TODO ALERT TODO ALERT TODO 
+        urlParams = new URLSearchParams(window.location.search),
+        pageNumber = urlParams.get('page')
+    if (pageNumber === null) {pageNumber = 1}
+</script>
+
+<script src="static/js/gallery.js"></script>
+<script src="https://kit.fontawesome.com/625ebdf0dc.js" crossorigin="anonymous"></script>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Viewer</title>
+    <link rel="stylesheet" href="static/css/gallery.css">
+</head>
+
+<body>
+    <div class="row">
+        <div class="column"></div> 
+        <div class="column"></div> 
+        <div class="column"></div> 
+        <div class="column"></div> 
+    </div>
+
+    <div style="position: fixed; z-index: 4; bottom: 10px; left: 50%; transform: translateX(-50%); background: rgba(255, 255, 255, 0.7); padding: 10px; border: 1px solid #ccc; border-radius: 5px; display: flex; justify-content: space-between; align-items: center;">
+        <button onclick="changePage(-1)">←</button>
+        <button onclick="changePage(1)">→</button>
+    </div>
+</body>
+</html>

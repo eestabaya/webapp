@@ -1,0 +1,39 @@
+version: '3.7'
+services:
+    service_web:
+      container_name: litdab
+      image: service_web
+      build: .
+      ports:
+        - 80:8080
+      volumes:
+        - ./:/root/
+      environment:
+        - MONGO_HOST=IP_ADDRESS_GOES_HERE
+        - MONGO_USERNAME=USERNAME
+        - MONGO_PASSWORD=PASSWORD
+        - MONGO_AUTH_DATABASE=admin
+        - MONGO_DEFAULT_DATABASE=DB
+        - CLIENT_ID=ID
+        - CLIENT_SECRET=SECRET
+        - REDIRECT_URI=URI
+        - S3_URL=URL
+        - S3_ACCESS_KEY=KEY
+        - S3_SECRET_KEY=SECRET
+        - GODHACK_PUBLIC_KEY=KEY
+        - HYPIXEL_API_KEY=KEY
+        - DSG_PUBLIC_KEY=KEY
+        - DSG_CLIENT_ID=CLIENT_ID
+        - DSG_CLIENT_SECRET=CLIENT_SECRET
+        - DSG_REDIRECT_URI=REDIRECT_URI
+        - DSG_LOG_WEBHOOK_URL=WEBHOOK_URL
+    redis_db:
+      container_name: redis_db
+      image: redis:latest
+      restart: unless-stopped
+      volumes:
+        - ./redis-db:/data/db
+networks:
+    default:
+      name: "network_name"
+      external: True

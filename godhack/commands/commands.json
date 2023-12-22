@@ -1,0 +1,12 @@
+[
+    {
+        "type": 1,
+        "name": "image",
+        "description": "Get a random 270/300 score message"
+    },
+    {
+        "type": 1,
+        "name": "mahiru",
+        "description": "Get a random Mahiru Shiina image"
+    }
+]

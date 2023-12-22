@@ -1,0 +1,15 @@
+[
+    {
+        "name": "verify",
+        "type": 1,
+        "description": "verify user",
+        "options": [
+            {
+                "name": "username",
+                "description": "Minecraft username",
+                "type": 3,
+                "required": true
+            }
+        ]
+    }
+]
