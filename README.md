@@ -4,4 +4,4 @@ NOTE: This repository has been mirrored from https://diplab.meecles.net/z-group/
 
 ## Contributors
 With help from:
-- Leo Du Toit
+- Leo Du Toit (frontend: party rank, image viewer)
